@@ -7,6 +7,7 @@ import {
 
   View,
   FlatList,
+  Pressable,
   Platform,
 } from "react-native";
 import { SafeArea } from "../../../components/utility/safe-area.component";
@@ -16,6 +17,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.components";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -33,8 +35,8 @@ const LoadingContainer = styled.View`
   left: 50%;
 `;
 
-export const ResturantsScreen = () => {
-  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+export const ResturantsScreen = ({ navigation }) => {
+  const { isLoading, restaurants } = useContext(RestaurantsContext);
   return (
     <SafeArea>
       {isLoading && (
@@ -47,9 +49,17 @@ export const ResturantsScreen = () => {
         data={restaurants}
         renderItem={({ item }) => {
           return (
-            <Spacer position="bottom" size="large">
-              <RestaurantsInfoCard restaurant={item} />
-            </Spacer>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("RestaurantDetail", {
+                  restaurant: item,
+                })
+              }
+            >
+              <Spacer position="bottom" size="large">
+                <RestaurantsInfoCard restaurant={item} />
+              </Spacer>
+            </TouchableOpacity>
           );
         }}
         keyExtractor={(item) => item.name}

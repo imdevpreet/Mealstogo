@@ -14,8 +14,11 @@
     "@expo-google-fonts/lato": "^0.2.2",
     "@expo-google-fonts/oswald": "^0.2.2",
     "@react-native-community/eslint-config": "^3.0.2",
-    "@react-navigation/bottom-tabs": "6.0.0",
-    "@react-navigation/native": "^6.0.10",
+    "@react-native-community/masked-view": "0.1.10",
+    "react-native-reanimated": "~2.8.0",
+    "@react-navigation/bottom-tabs": "^5.11.2",
+    "@react-navigation/native": "^5.8.10",
+    "@react-navigation/stack": "^5.12.8",
     "camelize": "^1.0.0",
     "eslint": "^8.16.0",
     "expo": "~45.0.0",
@@ -33,7 +36,9 @@
     "react-native-svg": "12.3.0",
     "react-native-vector-icons": "9.1.0 ",
     "react-native-web": "0.17.7",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "react-native-gesture-handler": "~2.2.1",
+    "react-native-maps": "0.30.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
