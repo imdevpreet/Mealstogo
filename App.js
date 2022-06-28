@@ -1,8 +1,8 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import "./src/config/firebase";
 
 import { ThemeProvider } from "styled-components/native";
-
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -13,10 +13,12 @@ import { LocationContextProvider } from "./src/services/location/location.contex
 import { theme } from "./src/infrastructure/theme";
 import { Navigation } from "./src/infrastructure/navigation";
 
-import { RestaurantCard } from "./src/features/resturants/components/restaurants-info-card.style";
-import { restaurantsRequest } from "./src/services/restaurants/restaurants.services";
-
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import {
+  AuthenticationContext,
+  AuthenticationContextProvider,
+} from "./src/infrastructure/authentication/authentication.context";
 
 export default function App() {
   const [OswaldLoaded] = useOswald({
@@ -29,14 +31,19 @@ export default function App() {
   if (!OswaldLoaded || !LatoLoaded) {
     return null;
   }
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantsContextProvider>
-            <Navigation />
-          </RestaurantsContextProvider>
-        </LocationContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
